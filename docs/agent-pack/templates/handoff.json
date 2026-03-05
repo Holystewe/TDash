@@ -1,0 +1,30 @@
+{
+  "taskId": "TASK-000",
+  "fromAgent": "planning-agent",
+  "toAgent": "backend-business-agent",
+  "summary": "",
+  "scope": {
+    "allowedPaths": [],
+    "allowedProjects": [],
+    "outOfScope": []
+  },
+  "inputs": {
+    "requirements": [],
+    "files": [],
+    "constraints": []
+  },
+  "expectedOutput": {
+    "deliverables": [],
+    "definitionOfDone": []
+  },
+  "validation": {
+    "build": [],
+    "test": [],
+    "lint": []
+  },
+  "risks": [],
+  "escalation": {
+    "required": false,
+    "reason": ""
+  }
+}

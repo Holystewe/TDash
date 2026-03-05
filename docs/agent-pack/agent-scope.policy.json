@@ -1,0 +1,254 @@
+{
+  "version": "1.0.0",
+  "assumptions": [
+    "DB Agent is constrained to backend infrastructure project (TDash.Infrastructure.csproj).",
+    "Scope is currently enforced at .csproj/folder level for backend DDD layers.",
+    "Primary deployment target is Azure Container Apps with Linux Docker containers."
+  ],
+  "agents": {
+    "planning-agent": {
+      "role": "Planning and orchestration",
+      "write": [
+        "docs/**",
+        "*.md"
+      ],
+      "read": [
+        "**/*"
+      ],
+      "forbiddenWrite": [
+        "src/backend/src/**/*.cs",
+        "src/backend/tests/**/*.cs",
+        "apps/web/src/**/*"
+      ],
+      "allowedProjects": [],
+      "allowedCommands": [
+        "dotnet sln list",
+        "dotnet build --no-restore",
+        "npm run lint --workspaces"
+      ],
+      "blockedCommands": [
+        "dotnet ef database update",
+        "terraform apply"
+      ]
+    },
+    "backend-business-agent": {
+      "role": "Business logic in DDD domain/application",
+      "write": [
+        "src/backend/src/TDash.Domain/**",
+        "src/backend/src/TDash.Application/**",
+        "src/backend/src/TDash.Api/**"
+      ],
+      "read": [
+        "src/backend/src/**",
+        "src/backend/tests/**",
+        "docs/**"
+      ],
+      "forbiddenWrite": [
+        "src/backend/src/TDash.Infrastructure/**",
+        "infra/**",
+        "apps/web/**"
+      ],
+      "allowedProjects": [
+        "src/backend/src/TDash.Domain/TDash.Domain.csproj",
+        "src/backend/src/TDash.Application/TDash.Application.csproj",
+        "src/backend/src/TDash.Api/TDash.Api.csproj"
+      ],
+      "allowedCommands": [
+        "dotnet build src/backend/src/TDash.Domain/TDash.Domain.csproj",
+        "dotnet build src/backend/src/TDash.Application/TDash.Application.csproj",
+        "dotnet build src/backend/src/TDash.Api/TDash.Api.csproj",
+        "dotnet test src/backend/tests/TDash.Api.Tests/TDash.Api.Tests.csproj --filter FullyQualifiedName~Application"
+      ],
+      "blockedCommands": [
+        "terraform apply",
+        "dotnet ef migrations add",
+        "dotnet ef database update"
+      ]
+    },
+    "db-agent": {
+      "role": "Database communication and persistence",
+      "write": [
+        "src/backend/src/TDash.Infrastructure/**"
+      ],
+      "read": [
+        "src/backend/src/TDash.Infrastructure/**",
+        "src/backend/src/TDash.Domain/**",
+        "src/backend/src/TDash.Application/**",
+        "src/backend/src/TDash.Api/**",
+        "infra/terraform/**"
+      ],
+      "forbiddenWrite": [
+        "src/backend/src/TDash.Domain/**",
+        "src/backend/src/TDash.Application/**",
+        "src/backend/src/TDash.Api/**",
+        "src/backend/tests/**",
+        "apps/web/**",
+        "infra/terraform/**"
+      ],
+      "allowedProjects": [
+        "src/backend/src/TDash.Infrastructure/TDash.Infrastructure.csproj"
+      ],
+      "allowedCommands": [
+        "dotnet build src/backend/src/TDash.Infrastructure/TDash.Infrastructure.csproj",
+        "dotnet test src/backend/tests/TDash.Api.Tests/TDash.Api.Tests.csproj --filter FullyQualifiedName~Infrastructure"
+      ],
+      "blockedCommands": [
+        "dotnet ef database update",
+        "terraform apply"
+      ]
+    },
+    "unit-test-agent": {
+      "role": "Unit and integration tests",
+      "write": [
+        "src/backend/tests/**",
+        "apps/web/src/**/*.test.*",
+        "apps/web/src/**/*.spec.*"
+      ],
+      "read": [
+        "src/backend/src/**",
+        "src/backend/tests/**",
+        "apps/web/src/**"
+      ],
+      "forbiddenWrite": [
+        "src/backend/src/**",
+        "infra/**"
+      ],
+      "allowedProjects": [
+        "src/backend/tests/TDash.Api.Tests/TDash.Api.Tests.csproj",
+        "apps/web/package.json"
+      ],
+      "allowedCommands": [
+        "dotnet test src/backend/tests/TDash.Api.Tests/TDash.Api.Tests.csproj",
+        "npm --workspace apps/web run test",
+        "npm --workspace apps/web run lint"
+      ],
+      "blockedCommands": [
+        "terraform apply",
+        "dotnet ef database update"
+      ]
+    },
+    "frontend-ui-agent": {
+      "role": "UI components and screens",
+      "write": [
+        "apps/web/src/**",
+        "apps/web/public/**"
+      ],
+      "read": [
+        "apps/web/**",
+        "src/backend/src/TDash.Api/**",
+        "docs/**"
+      ],
+      "forbiddenWrite": [
+        "src/backend/**",
+        "infra/**"
+      ],
+      "allowedProjects": [
+        "apps/web/package.json"
+      ],
+      "allowedCommands": [
+        "npm --workspace apps/web run lint",
+        "npm --workspace apps/web run test",
+        "npm --workspace apps/web run build"
+      ],
+      "blockedCommands": [
+        "dotnet ef database update",
+        "terraform apply"
+      ]
+    },
+    "frontend-data-agent": {
+      "role": "API integration, state and data mapping",
+      "write": [
+        "apps/web/src/**"
+      ],
+      "read": [
+        "apps/web/src/**",
+        "src/backend/src/TDash.Api/**",
+        "src/backend/src/TDash.Application/**"
+      ],
+      "forbiddenWrite": [
+        "src/backend/src/TDash.Domain/**",
+        "src/backend/src/TDash.Infrastructure/**",
+        "infra/**"
+      ],
+      "allowedProjects": [
+        "apps/web/package.json"
+      ],
+      "allowedCommands": [
+        "npm --workspace apps/web run lint",
+        "npm --workspace apps/web run test"
+      ],
+      "blockedCommands": [
+        "dotnet ef database update",
+        "terraform apply"
+      ]
+    },
+    "frontend-test-agent": {
+      "role": "Frontend unit/integration tests",
+      "write": [
+        "apps/web/src/**/*.test.*",
+        "apps/web/src/**/*.spec.*",
+        "apps/web/src/**/__tests__/**"
+      ],
+      "read": [
+        "apps/web/src/**"
+      ],
+      "forbiddenWrite": [
+        "apps/web/src/**/*.tsx",
+        "src/backend/**",
+        "infra/**"
+      ],
+      "allowedProjects": [
+        "apps/web/package.json"
+      ],
+      "allowedCommands": [
+        "npm --workspace apps/web run test",
+        "npm --workspace apps/web run lint"
+      ],
+      "blockedCommands": [
+        "dotnet ef database update",
+        "terraform apply"
+      ]
+    },
+    "containerapp-deploy-agent": {
+      "role": "Deployment orchestration for Azure Container Apps on Linux/Docker",
+      "write": [
+        "infra/terraform/**",
+        "infra/**/Dockerfile*",
+        "src/backend/**/Dockerfile*",
+        "apps/web/**/Dockerfile*",
+        ".github/workflows/**",
+        "docs/**"
+      ],
+      "read": [
+        "**/*"
+      ],
+      "forbiddenWrite": [
+        "src/backend/src/**/*.cs",
+        "apps/web/src/**/*"
+      ],
+      "allowedProjects": [
+        "infra/terraform/environments/dev/main.tf",
+        "infra/terraform/environments/prod/main.tf"
+      ],
+      "allowedCommands": [
+        "terraform fmt",
+        "terraform validate",
+        "terraform plan",
+        "docker build",
+        "docker push",
+        "az containerapp create",
+        "az containerapp update"
+      ],
+      "blockedCommands": [
+        "dotnet ef database update",
+        "terraform apply"
+      ]
+    }
+  },
+  "escalationRequired": [
+    "Schema-breaking DB changes",
+    "Changes to public API contracts",
+    "Cross-layer refactors across more than one DDD project",
+    "Any apply/deploy operation"
+  ]
+}

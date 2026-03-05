@@ -1,0 +1,38 @@
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Frontend build outputs
+apps/web/dist/
+
+# .NET
+**/bin/
+**/obj/
+**/*.GeneratedMSBuildEditorConfig.editorconfig
+**/*.csproj.FileListAbsolute.txt
+**/CoverletSourceRootsMapping_*
+TestResults/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl

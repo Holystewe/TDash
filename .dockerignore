@@ -1,0 +1,14 @@
+**/.git
+**/.vscode
+**/bin
+**/obj
+**/node_modules
+**/dist
+**/TestResults
+**/.terraform
+**/*.tfstate
+**/*.tfstate.*
+**/*.user
+**/*.suo
+.git
+.vscode

@@ -1,0 +1,17 @@
+resource_group_name = "rg-tdash-dev"
+location            = ""
+preferred_location  = "italynorth"
+fallback_location   = "westeurope"
+use_fallback_location = false
+
+tags = {
+  environment = "dev"
+  project     = "tdash"
+}
+
+container_app_environment_name = "cae-tdash-dev"
+api_container_app_name         = "ca-api-tdash-dev"
+web_container_app_name         = "ca-web-tdash-dev"
+
+api_image = "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest"
+web_image = "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest"

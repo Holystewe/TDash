@@ -1,0 +1,30 @@
+{
+  "name": "tdash-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "npm@10.9.2",
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "npm --workspace apps/web run build",
+    "build:backend": "dotnet build src/backend/TDash.slnx -c Release --nologo",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "npm --workspace apps/web run test",
+    "test:backend": "dotnet test src/backend/TDash.slnx -c Release --no-build --nologo",
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "lint:frontend": "npm --workspace apps/web run lint",
+    "lint:backend": "dotnet build src/backend/TDash.slnx -c Release --nologo -warnaserror",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky",
+    "commitlint": "commitlint --from=HEAD~1 --to=HEAD"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "husky": "9.1.7",
+    "prettier": "3.4.2"
+  }
+}

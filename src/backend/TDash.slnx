@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TDash.Api/TDash.Api.csproj" />
+    <Project Path="src/TDash.Application/TDash.Application.csproj" />
+    <Project Path="src/TDash.Domain/TDash.Domain.csproj" />
+    <Project Path="src/TDash.Infrastructure/TDash.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TDash.Api.Tests/TDash.Api.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  frontend:
+    name: Frontend (React)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint:frontend
+
+      - name: Test
+        run: npm run test:frontend
+
+      - name: Build
+        run: npm run build:frontend
+
+  backend:
+    name: Backend (.NET)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore src/backend/TDash.slnx
+
+      - name: Build
+        run: dotnet build src/backend/TDash.slnx -c Release --no-restore --nologo
+
+      - name: Test
+        run: dotnet test src/backend/TDash.slnx -c Release --no-build --nologo
+
+  containers:
+    name: Container build validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build API image
+        run: docker build -f src/backend/src/TDash.Api/Dockerfile src/backend -t tdash-api:ci
+
+      - name: Build WEB image
+        run: docker build -f apps/web/Dockerfile . -t tdash-web:ci
+
+  terraform:
+    name: Terraform validate (dev/prod)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform init/validate (dev)
+        run: |
+          terraform -chdir=infra/terraform/environments/dev init -backend=false
+          terraform -chdir=infra/terraform/environments/dev validate
+
+      - name: Terraform init/validate (prod)
+        run: |
+          terraform -chdir=infra/terraform/environments/prod init -backend=false
+          terraform -chdir=infra/terraform/environments/prod validate

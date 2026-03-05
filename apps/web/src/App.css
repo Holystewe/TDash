@@ -1,0 +1,181 @@
+#root {
+  margin: 0;
+}
+
+.dashboard {
+  margin: 0 auto;
+  max-width: 72rem;
+  padding: 2rem 1rem 3rem;
+}
+
+.dashboard-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+h1,
+h2 {
+  margin: 0 0 0.75rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+}
+
+p {
+  margin: 0;
+  color: #334155;
+}
+
+.badge {
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.85rem;
+  color: #1e293b;
+  background: #ffffff;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.kpi-card,
+.panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.kpi-card h2,
+.panel h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.kpi-card strong {
+  display: block;
+  font-size: 1.55rem;
+  margin-bottom: 0.2rem;
+}
+
+.delta {
+  font-size: 0.875rem;
+}
+
+.delta.positive {
+  color: #15803d;
+}
+
+.delta.negative {
+  color: #b91c1c;
+}
+
+.panel {
+  margin-top: 1rem;
+}
+
+.bars {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 2rem 1fr 2rem;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.bar-row > span {
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.bar-row > strong {
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+.bar-track {
+  height: 0.7rem;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+}
+
+.bar-fill.pct-10 {
+  width: 10%;
+}
+
+.bar-fill.pct-20 {
+  width: 20%;
+}
+
+.bar-fill.pct-30 {
+  width: 30%;
+}
+
+.bar-fill.pct-40 {
+  width: 40%;
+}
+
+.bar-fill.pct-50 {
+  width: 50%;
+}
+
+.bar-fill.pct-60 {
+  width: 60%;
+}
+
+.bar-fill.pct-70 {
+  width: 70%;
+}
+
+.bar-fill.pct-80 {
+  width: 80%;
+}
+
+.bar-fill.pct-90 {
+  width: 90%;
+}
+
+.bar-fill.pct-100 {
+  width: 100%;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 0.65rem 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+th {
+  color: #334155;
+  font-weight: 600;
+}
