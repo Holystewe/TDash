@@ -21,8 +21,8 @@
 
 | ID | Tema | Req | Owner agent | Supporto | Dipendenze | DoD sintetica |
 |---|---|---|---|---|---|---|
-| BL-001 | Baseline deploy su Azure Container Apps (Linux/Docker) con env dev/prod | REQ-02 | containerapp-deploy-agent | planning-agent | nessuna | IaC valida, immagini Docker versionate, deploy dev riuscito |
-| BL-002 | OIDC Azure (Entra ID) + ruoli base (`player`, `store`, `admin`) | REQ-06, REQ-02 | backend-business-agent | containerapp-deploy-agent, frontend-data-agent | BL-001 | Login funzionante, claim role propagati BE/FE |
+| BL-001 | Baseline deploy su Azure App Service (Linux) con env dev/prod | REQ-02 | appservice-deploy-agent | planning-agent | nessuna | IaC valida, App Service Plan + App Service creati, deploy dev riuscito |
+| BL-002 | OIDC Azure (Entra ID) + ruoli base (`player`, `store`, `admin`) | REQ-06, REQ-02 | backend-business-agent | appservice-deploy-agent, frontend-data-agent | BL-001 | Login funzionante, claim role propagati BE/FE |
 | BL-003 | Schema SQL iniziale (store, torneo, player, partecipazione, deck, preregistrazione) | REQ-04, REQ-09, REQ-10, REQ-11 | db-agent | backend-business-agent | BL-001 | Modello persistente minimo pronto per use case MVP |
 | BL-004 | Shell FE con Tailwind + routing 3 aree (pubblico/backoffice store/backoffice admin) | REQ-02, REQ-03, REQ-13 | frontend-ui-agent | frontend-data-agent | BL-002 | Navigazione a sezioni con menu hamburger e layout coerenti Tailwind |
 | BL-005 | Mappa tornei globale con pin store (Leaflet + OpenStreetMap) | REQ-01, REQ-03 | frontend-ui-agent | backend-business-agent, frontend-data-agent | BL-003, BL-004 | Mappa pubblica con pin e popup info torneo/store |
@@ -42,8 +42,8 @@
 | BL-011 | Dashboard giocatori globale/regione/nazione con filtri | REQ-07 | frontend-ui-agent | backend-business-agent, frontend-data-agent | P0 completo | Dashboard con filtri geografici e KPI base |
 | BL-012 | Profilo giocatore (v1) | REQ-08 | backend-business-agent | frontend-ui-agent, db-agent | BL-011 | Profilo pubblico con metriche principali |
 | BL-013 | Backoffice organizzatore tornei avanzato (gestione risultati/deck) | REQ-02, REQ-09 | backend-business-agent | frontend-ui-agent, db-agent | BL-007 | Flusso completo post-evento |
-| BL-014 | Notifiche email geolocalizzate tornei in zona | REQ-12 | backend-business-agent | containerapp-deploy-agent, db-agent | BL-006, BL-008 | Invio notifiche opt-in con template base |
-| BL-015 | Osservabilità e hardening sicurezza ACA (diagnostics, policy baseline) | REQ-02 | containerapp-deploy-agent | planning-agent | BL-001 | Logging/metriche attive e check sicurezza base |
+| BL-014 | Notifiche email geolocalizzate tornei in zona | REQ-12 | backend-business-agent | appservice-deploy-agent, db-agent | BL-006, BL-008 | Invio notifiche opt-in con template base |
+| BL-015 | Osservabilità e hardening sicurezza App Service (diagnostics, policy baseline) | REQ-02 | appservice-deploy-agent | planning-agent | BL-001 | Logging/metriche attive e check sicurezza base |
 
 ## P2 — Optimization & Scale
 
@@ -51,10 +51,10 @@
 |---|---|---|---|---|---|---|
 | BL-016 | Ottimizzazioni performance query/dashboard | REQ-07, REQ-09 | db-agent | backend-business-agent | BL-011 | Miglioramento tempi p95 definito |
 | BL-017 | Feature avanzate profilo (storico, ranking, confronto) | REQ-08 | backend-business-agent | frontend-ui-agent | BL-012 | Esperienza profilo avanzata |
-| BL-018 | Pipeline deploy progressivo (canary/blue-green revisioni ACA) | REQ-02 | containerapp-deploy-agent | planning-agent | BL-015 | Rollout sicuro con rollback rapido |
+| BL-018 | Pipeline deploy progressivo (slot swap/blue-green App Service) | REQ-02 | appservice-deploy-agent | planning-agent | BL-015 | Rollout sicuro con rollback rapido |
 
 ## Ready Queue consigliata (prossimi 5 task)
-1. **BL-001** Baseline ACA Linux/Docker dev/prod
+1. **BL-001** Baseline App Service Linux dev/prod
 2. **BL-002** OIDC + ruoli base
 3. **BL-003** Schema SQL iniziale
 4. **BL-004** Shell FE Tailwind + routing 3 aree

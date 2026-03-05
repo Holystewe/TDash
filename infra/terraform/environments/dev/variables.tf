@@ -1,3 +1,13 @@
+variable "subscription_id" {
+  description = "Azure subscription ID used by provider."
+  type        = string
+}
+
+variable "tenant_id" {
+  description = "Azure tenant ID used by provider."
+  type        = string
+}
+
 variable "resource_group_name" {
   description = "Resource group name for the dev environment."
   type        = string
@@ -33,27 +43,47 @@ variable "tags" {
   default     = {}
 }
 
-variable "container_app_environment_name" {
-  description = "Container Apps managed environment name for dev."
+variable "app_service_plan_name" {
+  description = "App Service Plan name for dev."
   type        = string
 }
 
-variable "api_container_app_name" {
-  description = "Container App name for backend API (dev)."
+variable "app_service_plan_sku_name" {
+  description = "App Service Plan SKU for dev (e.g. B1, P1v3)."
+  type        = string
+  default     = "B1"
+}
+
+variable "api_app_service_name" {
+  description = "App Service name for backend API (dev)."
   type        = string
 }
 
-variable "web_container_app_name" {
-  description = "Container App name for frontend WEB (dev)."
+variable "web_app_service_name" {
+  description = "App Service name for frontend WEB (dev)."
   type        = string
 }
 
-variable "api_image" {
-  description = "Docker image for backend API."
+variable "api_dotnet_version" {
+  description = "Dotnet runtime version for API (e.g. 8.0)."
   type        = string
+  default     = "8.0"
 }
 
-variable "web_image" {
-  description = "Docker image for frontend WEB."
+variable "web_node_version" {
+  description = "Node runtime version for WEB (e.g. 20-lts)."
   type        = string
+  default     = "20-lts"
+}
+
+variable "api_always_on" {
+  description = "Keep API app always on."
+  type        = bool
+  default     = false
+}
+
+variable "web_always_on" {
+  description = "Keep WEB app always on."
+  type        = bool
+  default     = false
 }

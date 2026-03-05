@@ -45,5 +45,5 @@ Se vuoi irrigidire ulteriormente i permessi, imposta il tuo orchestratore per bl
 
 ## Deploy agent (nuovo)
 
-- Prompt dedicato deploy ACA Linux/Docker: `prompts/containerapp-deploy-agent.system.md`
-- Usa questo agent solo per attività di containerizzazione, pipeline e deployment infra.
+- Prompt dedicato deploy App Service Linux: `prompts/appservice-deploy-agent.system.md`
+- Usa questo agent solo per attività di deployment App Service, pipeline e infra.

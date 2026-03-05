@@ -9,52 +9,44 @@ module "resource_group" {
   tags     = var.tags
 }
 
-module "container_app_environment" {
-  source              = "../../modules/container-app-environment"
-  name                = var.container_app_environment_name
+module "app_service_plan" {
+  source              = "../../modules/app-service-plan"
+  name                = var.app_service_plan_name
   location            = local.selected_location
   resource_group_name = module.resource_group.name
+  os_type             = "Linux"
+  sku_name            = var.app_service_plan_sku_name
   tags                = var.tags
 }
 
-module "api_container_app" {
-  source                       = "../../modules/container-app"
-  name                         = var.api_container_app_name
-  resource_group_name          = module.resource_group.name
-  container_app_environment_id = module.container_app_environment.id
-  container_name               = "api"
-  image                        = var.api_image
-  cpu                          = 0.25
-  memory                       = "0.5Gi"
-  target_port                  = 8080
-  external_enabled             = true
-  min_replicas                 = 0
-  max_replicas                 = 1
-  tags                         = var.tags
+module "api_app_service" {
+  source              = "../../modules/app-service-webapp"
+  name                = var.api_app_service_name
+  location            = local.selected_location
+  resource_group_name = module.resource_group.name
+  service_plan_id     = module.app_service_plan.id
+  dotnet_version      = var.api_dotnet_version
+  always_on           = var.api_always_on
+  tags                = var.tags
 }
 
-module "web_container_app" {
-  source                       = "../../modules/container-app"
-  name                         = var.web_container_app_name
-  resource_group_name          = module.resource_group.name
-  container_app_environment_id = module.container_app_environment.id
-  container_name               = "web"
-  image                        = var.web_image
-  cpu                          = 0.25
-  memory                       = "0.5Gi"
-  target_port                  = 80
-  external_enabled             = true
-  min_replicas                 = 0
-  max_replicas                 = 1
-  tags                         = var.tags
+module "web_app_service" {
+  source              = "../../modules/app-service-webapp"
+  name                = var.web_app_service_name
+  location            = local.selected_location
+  resource_group_name = module.resource_group.name
+  service_plan_id     = module.app_service_plan.id
+  node_version        = var.web_node_version
+  always_on           = var.web_always_on
+  tags                = var.tags
 }
 
-output "api_fqdn" {
-  value       = module.api_container_app.latest_revision_fqdn
-  description = "Public endpoint FQDN for API container app."
+output "api_default_hostname" {
+  value       = module.api_app_service.default_hostname
+  description = "Default hostname for API App Service."
 }
 
-output "web_fqdn" {
-  value       = module.web_container_app.latest_revision_fqdn
-  description = "Public endpoint FQDN for WEB container app."
+output "web_default_hostname" {
+  value       = module.web_app_service.default_hostname
+  description = "Default hostname for WEB App Service."
 }

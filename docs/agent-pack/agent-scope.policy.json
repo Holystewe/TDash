@@ -3,7 +3,7 @@
   "assumptions": [
     "DB Agent is constrained to backend infrastructure project (TDash.Infrastructure.csproj).",
     "Scope is currently enforced at .csproj/folder level for backend DDD layers.",
-    "Primary deployment target is Azure Container Apps with Linux Docker containers."
+    "Primary deployment target is Azure App Service on Linux."
   ],
   "agents": {
     "planning-agent": {
@@ -209,13 +209,10 @@
         "terraform apply"
       ]
     },
-    "containerapp-deploy-agent": {
-      "role": "Deployment orchestration for Azure Container Apps on Linux/Docker",
+    "appservice-deploy-agent": {
+      "role": "Deployment orchestration for Azure App Service on Linux",
       "write": [
         "infra/terraform/**",
-        "infra/**/Dockerfile*",
-        "src/backend/**/Dockerfile*",
-        "apps/web/**/Dockerfile*",
         ".github/workflows/**",
         "docs/**"
       ],
@@ -234,10 +231,11 @@
         "terraform fmt",
         "terraform validate",
         "terraform plan",
-        "docker build",
-        "docker push",
-        "az containerapp create",
-        "az containerapp update"
+        "az appservice plan create",
+        "az webapp create",
+        "az webapp update",
+        "az webapp config",
+        "az webapp deployment"
       ],
       "blockedCommands": [
         "dotnet ef database update",

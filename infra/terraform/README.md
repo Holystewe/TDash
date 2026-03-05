@@ -5,8 +5,8 @@ This folder contains Azure-targeted Terraform scaffolding only.
 Current scope:
 
 - reusable module: `modules/resource-group`
-- reusable module: `modules/container-app-environment`
-- reusable module: `modules/container-app`
+- reusable module: `modules/app-service-plan`
+- reusable module: `modules/app-service-webapp`
 - environment entries: `environments/dev` and `environments/prod`
 - provider bootstrap: `providers.tf`
 
@@ -15,11 +15,11 @@ Environment status:
 - `dev`: active baseline with cost-optimized settings
 - `prod`: placeholder scaffold (empty files), to be implemented later
 
-Container baseline:
+App Service baseline:
 
-- Azure Container Apps managed environment
-- one Container App for API and one for WEB per environment
-- Linux container images via `api_image` and `web_image` variables
+- App Service Plan (Linux)
+- one App Service for API and one for WEB per environment
+- runtime stacks configured via `api_dotnet_version` and `web_node_version`
 
 Validation flow (before plan/apply):
 

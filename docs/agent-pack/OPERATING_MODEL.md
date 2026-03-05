@@ -11,7 +11,7 @@
 | Frontend UI Agent | `apps/web` | `apps/web/src/**`, `apps/web/public/**` | FE + contratti API | `src/backend/**`, `infra/**` |
 | Frontend Data Agent | `apps/web` | `apps/web/src/**` | FE + Api/Application | `src/backend/**`, `infra/**` |
 | Frontend Test Agent | `apps/web` tests | test FE only | FE source | backend + infra |
-| ContainerApp Deploy Agent | ACA Linux + Docker + IaC | `infra/terraform/**`, Dockerfile, pipeline docs | repo completo | codice business FE/BE |
+| AppService Deploy Agent | App Service Linux + IaC | `infra/terraform/**`, pipeline docs | repo completo | codice business FE/BE |
 
 ## 2) Permessi esecuzione
 
@@ -50,7 +50,7 @@
 2. Agent owner implementa nel proprio scope.
 3. Unit Test/Frontend Test Agent aggiunge verifiche.
 4. Reviewer umano valida quality gates e merge.
-5. Deploy Agent interviene solo su richiesta esplicita per pipeline/deployment ACA.
+5. Deploy Agent interviene solo su richiesta esplicita per pipeline/deployment App Service.
 
 ## 4) Contratto di handoff minimo
 

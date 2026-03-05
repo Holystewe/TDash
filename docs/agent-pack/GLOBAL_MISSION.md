@@ -4,8 +4,8 @@
 Costruire una piattaforma globale per l'ecosistema competitivo di **Keyforge**, con dashboard pubbliche e ambienti di backoffice dedicati, capace di aggregare tornei, store, giocatori e risultati in modo affidabile, scalabile e semplice da usare.
 
 ## Obiettivo architetturale corrente
-- Deploy su **Azure Container Apps**
-- Workload containerizzati **Docker su Linux**
+- Deploy su **Azure App Service**
+- Workload su **App Service Linux** (no container)
 - Frontend e backend separati, orchestrati via IaC
 - Governance multi-agent con confini chiari
 
@@ -51,7 +51,7 @@ Costruire una piattaforma globale per l'ecosistema competitivo di **Keyforge**, 
 
 ## Linee guida Infra (mission)
 - Provisioning in Terraform in `infra/terraform`
-- Target compute principale: Azure Container Apps (Linux containers)
+- Target compute principale: Azure App Service (Linux)
 - Secret management e identity-first (managed identity dove possibile)
 - Ambiente pronto per due stage almeno: dev e prod
 
@@ -68,7 +68,7 @@ Usare questo blocco nei prompt, senza ripetere tutto il documento:
 ```text
 CONTEXT_CAPSULE_V1:
 - Goal: Global Keyforge tournaments platform
-- Compute: Azure Container Apps, Linux, Docker
+- Compute: Azure App Service, Linux
 - FE: Tailwind, public+2 backoffices, world map with free provider
 - BE: DDD + stable APIs + short TTL cache + OIDC roles
 - Data: SQL persistence
