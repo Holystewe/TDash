@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { CircleMarker, MapContainer, Popup, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
+import './App.inline-fixes.css'
 
 type SectionKey =
   | 'players-dashboard'
@@ -53,12 +54,12 @@ const mockDeckKpis = [
 ]
 
 const houseDistribution = [
-  { house: 'Shadows', value: 78, color: 'bg-kf-shadow' },
-  { house: 'Logos', value: 64, color: 'bg-kf-logos' },
-  { house: 'Dis', value: 59, color: 'bg-kf-dis' },
-  { house: 'Untamed', value: 57, color: 'bg-kf-untamed' },
-  { house: 'Brobnar', value: 42, color: 'bg-kf-brobnar' },
-  { house: 'Saurian', value: 37, color: 'bg-kf-saurian' },
+  { house: 'Shadows', value: 78, color: 'bg-kf-shadow', widthClass: 'house-width-100' },
+  { house: 'Logos', value: 64, color: 'bg-kf-logos', widthClass: 'house-width-82' },
+  { house: 'Dis', value: 59, color: 'bg-kf-dis', widthClass: 'house-width-76' },
+  { house: 'Untamed', value: 57, color: 'bg-kf-untamed', widthClass: 'house-width-73' },
+  { house: 'Brobnar', value: 42, color: 'bg-kf-brobnar', widthClass: 'house-width-54' },
+  { house: 'Saurian', value: 37, color: 'bg-kf-saurian', widthClass: 'house-width-47' },
 ]
 
 const tournaments: Tournament[] = [
@@ -173,8 +174,6 @@ function PlayersDashboardSection() {
 }
 
 function DecksDashboardSection() {
-  const peak = Math.max(...houseDistribution.map((item) => item.value))
-
   return (
     <section>
       <SectionTitle
@@ -190,7 +189,7 @@ function DecksDashboardSection() {
             <div key={house.house} className="grid grid-cols-[110px_1fr_48px] items-center gap-2">
               <span className="text-sm text-slate-200">{house.house}</span>
               <div className="h-2.5 overflow-hidden rounded-full bg-white/15">
-                <div className={`h-full ${house.color}`} style={{ width: `${(house.value / peak) * 100}%` }} />
+                <div className={`h-full ${house.color} ${house.widthClass}`} />
               </div>
               <span className="text-right text-sm text-kf-gold">{house.value}%</span>
             </div>
