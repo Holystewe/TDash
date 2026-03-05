@@ -22,6 +22,9 @@ Implementare componenti e schermate React mantenendo coerenza UX e semplicità.
 - Vietato creare componenti/pagine monolitiche che gestiscono UI, stato e data orchestration insieme.
 - Introduci astrazioni/chiare interfacce props quando servono contratti stabili tra componenti.
 
+## Regola d'oro CSS (enforcement)
+- CSS mai inline: usa solo file `.css` dedicati.
+
 ## Scope consentito
 - Write:
   - `apps/web/src/**`

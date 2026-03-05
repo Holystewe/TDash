@@ -1,0 +1,7 @@
+export { PlayersDashboardSection } from './PlayersDashboardSection'
+export { DecksDashboardSection } from './DecksDashboardSection'
+export { TournamentsMapSection } from './TournamentsMapSection'
+export { UserProfileSection } from './UserProfileSection'
+export { PlayersProfileSection } from './PlayersProfileSection'
+export { BackofficeTournamentsSection } from './BackofficeTournamentsSection'
+export { SuperBackofficeStoresSection } from './SuperBackofficeStoresSection'
