@@ -1,0 +1,21 @@
+resource_group_name = "rg-tdash-prod"
+location            = ""
+preferred_location  = "westeurope"
+fallback_location   = "northeurope"
+use_fallback_location = false
+
+tags = {
+  environment = "prod"
+  project     = "tdash"
+}
+
+app_service_plan_name     = "asp-tdash-prod"
+app_service_plan_sku_name = "P1v3"
+api_app_service_name      = "app-tdash-api-prod"
+web_app_service_name      = "app-tdash-web-prod"
+
+api_dotnet_version = "8.0"
+web_node_version   = "20-lts"
+
+api_always_on = true
+web_always_on = true

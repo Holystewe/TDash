@@ -13,7 +13,7 @@ Current scope:
 Environment status:
 
 - `dev`: active baseline with cost-optimized settings
-- `prod`: placeholder scaffold (empty files), to be implemented later
+- `prod`: active baseline scaffold mirroring dev with production defaults
 
 App Service baseline:
 

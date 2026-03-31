@@ -7,7 +7,7 @@ resource "azurerm_linux_web_app" "this" {
   tags                = var.tags
 
   site_config {
-    always_on        = var.always_on
+    always_on         = var.always_on
     health_check_path = var.health_check_path
 
     application_stack {

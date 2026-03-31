@@ -1,7 +1,7 @@
-resource_group_name = "rg-tdash-dev"
-location            = ""
-preferred_location  = "italynorth"
-fallback_location   = "westeurope"
+resource_group_name   = "rg-tdash-dev"
+location              = ""
+preferred_location    = "italynorth"
+fallback_location     = "westeurope"
 use_fallback_location = false
 
 tags = {
